@@ -37,7 +37,7 @@ App.propTypes = {
 
 export default createContainer(() => {
   return {
-    tasks: Tasks.find({}).fetch(),
+    tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
   };
 }, App);
 

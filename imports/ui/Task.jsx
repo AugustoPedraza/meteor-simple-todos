@@ -26,7 +26,8 @@ export default class Task extends Component {
           <input
             type='checkbox'
             readOnly
-            checked={this.props.task.checked}
+            defaultChecked={this.props.task.checked}
+            defaultValue={this.props.task.checked}
             onClick={this.toggleChecked.bind(this)}
           />
 

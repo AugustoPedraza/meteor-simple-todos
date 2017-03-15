@@ -10,13 +10,7 @@ export default class NewTaskForm extends Component {
 
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
-    Tasks.insert({
-      text,
-      owner: Meteor.userId(),            //_id of logged in user
-      username: Meteor.user().username,  //username of logged in user
-      createdAt: new Date(),
-    });
-
+    Meteor.call('tasks.insert', text);
 
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
   }

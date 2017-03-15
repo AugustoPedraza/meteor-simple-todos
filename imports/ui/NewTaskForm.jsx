@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 
 import { Tasks } from '../api/tasks.js'
  
@@ -11,6 +12,8 @@ export default class NewTaskForm extends Component {
 
     Tasks.insert({
       text,
+      owner: Meteor.userId(),            //_id of logged in user
+      username: Meteor.user().username,  //username of logged in user
       createdAt: new Date(),
     });
 

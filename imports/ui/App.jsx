@@ -5,6 +5,7 @@ import { Tasks } from '../api/tasks.js';
 
 import Task from './Task.jsx';
 import NewTaskForm from './NewTaskForm.jsx';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 // App component - represents the whole app
 class App extends Component {
@@ -49,7 +50,10 @@ class App extends Component {
             />
             Hide Completed Tasks
           </label>
-          <NewTaskForm />
+          <AccountsUIWrapper />
+          { this.props.currentUser ? 
+            <NewTaskForm /> : ''
+          }
         </header>
 
         <ul>
@@ -62,12 +66,14 @@ class App extends Component {
 
 App.propTypes = {
   tasks: PropTypes.array.isRequired,
+  currentUser: PropTypes.object,
 };
 
 export default createContainer(() => {
   return {
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+    currentUser: Meteor.user(),
   };
 }, App);
 
